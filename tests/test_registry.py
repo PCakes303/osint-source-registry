@@ -54,6 +54,17 @@ class SourceRegistryTests(unittest.TestCase):
         self.assertCountEqual(outcomes, ["added", "rejected"])
         self.assertEqual(len(registry), 1)
 
+
+    def test_registry_snapshots_mutable_source_record_lists(self):
+        values = dict(self.approved.__dict__)
+        values["permitted_purposes"] = list(self.approved.permitted_purposes)
+        mutable_record = SourceRecord(**values)
+        self.registry.add(mutable_record)
+        values["permitted_purposes"].append("unreviewed-purpose")
+        stored = self.registry.get(self.approved.source_id)
+        self.assertEqual(stored.permitted_purposes, self.approved.permitted_purposes)
+        self.assertNotIn("unreviewed-purpose", stored.permitted_purposes)
+
     def test_approved_sources_are_returned_in_deterministic_order(self):
         second = self.approved.to_dict()
         second["source_id"] = "example.z-public-api"
