@@ -47,6 +47,7 @@ def _valid_https_url(value: Any) -> bool:
         return False
     try:
         parts = urlsplit(value)
+        parts.port  # Access validates malformed and out-of-range port syntax.
         return (
             parts.scheme == "https"
             and bool(parts.hostname)
@@ -103,12 +104,12 @@ def validate_source_record(
     if not isinstance(record["review_status"], str) or record["review_status"] not in REVIEW_STATES:
         errors.append("review_status is not supported")
 
-    for field in ("collection_constraints", "permitted_purposes", "prohibited_purposes"):
+    for field, max_item_length in (("collection_constraints", 500), ("permitted_purposes", 100), ("prohibited_purposes", 100)):
         value = record[field]
         if not isinstance(value, (list, tuple)) or len(value) > 20:
             errors.append(f"{field} must be a list with at most 20 items")
-        elif any(not isinstance(item, str) or len(item) < 2 or len(item) > 500 for item in value):
-            errors.append(f"{field} contains an invalid item")
+        elif any(not isinstance(item, str) or len(item) < 2 or len(item) > max_item_length for item in value):
+            errors.append(f"{field} contains an invalid item (maximum {max_item_length} characters)")
 
     rate = record["declared_rate_limit_per_minute"]
     if rate is not None and (isinstance(rate, bool) or not isinstance(rate, int) or not 1 <= rate <= 100000):
@@ -141,7 +142,13 @@ def validate_source_record(
             errors.append("approved source requires timezone-aware review_expires_at")
         if reviewed is not None and expires is not None and expires <= reviewed:
             errors.append("review_expires_at must be later than reviewed_at")
-        current = now or datetime.now(timezone.utc)
+        if now is None:
+            current = datetime.now(timezone.utc)
+        elif not isinstance(now, datetime):
+            errors.append("validation clock must be a timezone-aware datetime")
+            current = datetime.now(timezone.utc)
+        else:
+            current = now
         if current.tzinfo is None or current.utcoffset() is None:
             errors.append("validation clock must be timezone-aware")
         elif reviewed is not None and reviewed > current.astimezone(timezone.utc):
