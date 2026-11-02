@@ -15,6 +15,22 @@ def load_example(name):
 
 
 class SourceRecordTests(unittest.TestCase):
+
+    def test_invalid_url_port_is_rejected(self):
+        record = load_example("pending-synthetic-source.json")
+        record["canonical_url"] = "https://example.org:invalid/"
+        self.assertTrue(any("canonical_url" in error for error in validate_source_record(record)))
+
+    def test_purpose_length_matches_schema(self):
+        record = load_example("pending-synthetic-source.json")
+        record["permitted_purposes"] = ["x" * 101]
+        self.assertTrue(any("permitted_purposes" in error for error in validate_source_record(record)))
+
+    def test_non_datetime_validation_clock_is_rejected(self):
+        record = load_example("approved-synthetic-source.json")
+        errors = validate_source_record(record, now="2026-11-02T00:00:00Z")
+        self.assertTrue(any("validation clock" in error for error in errors))
+
     def test_approved_synthetic_record_matches_schema_and_model(self):
         record = load_example("approved-synthetic-source.json")
         schema = json.loads((ROOT / "schemas/source-record.schema.json").read_text(encoding="utf-8"))
