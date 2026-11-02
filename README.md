@@ -1,7 +1,6 @@
 # OSINT Source Registry
 
 **Repository:** `PCakes303/osint-source-registry`  
-**Portfolio position:** 19 / 29 public repositories  
 **Maturity:** scaffolding  
 **License:** pending portfolio review
 
