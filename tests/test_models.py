@@ -31,6 +31,12 @@ class SourceRecordTests(unittest.TestCase):
         errors = validate_source_record(record, now="2026-11-02T00:00:00Z")
         self.assertTrue(any("validation clock" in error for error in errors))
 
+
+    def test_collection_constraint_minimum_matches_schema(self):
+        record = load_example("pending-synthetic-source.json")
+        record["collection_constraints"] = ["ab"]
+        self.assertTrue(any("collection_constraints" in error for error in validate_source_record(record)))
+
     def test_approved_synthetic_record_matches_schema_and_model(self):
         record = load_example("approved-synthetic-source.json")
         schema = json.loads((ROOT / "schemas/source-record.schema.json").read_text(encoding="utf-8"))
