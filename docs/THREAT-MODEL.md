@@ -15,11 +15,11 @@ All record fields are untrusted input, including operator names, URLs, terms ref
 
 | Threat | Current control | Residual risk |
 |---|---|---|
-| Malformed or ambiguous records | Strict schema and model validation | Schema correctness does not establish factual accuracy |
+| Malformed or ambiguous records | Strict schema/model validation, URL port checks, schema-aligned field bounds and immutable stored snapshots | Schema correctness does not establish factual accuracy |
 | Plain HTTP or malformed source URLs | HTTPS URL syntax required | No DNS, host ownership, redirect, or SSRF validation; no network requests occur |
 | Expired approval reused | Approved-only query checks expiry | Approval is unsigned and reviewer identity is not authenticated |
 | Unknown or unreviewed source treated as approved | Pending/non-approved records excluded from approved query | Downstream consumers must preserve this gate |
-| Registry exhaustion | Bounded in-memory record capacity | Process-local memory only; no durable store |
+| Registry exhaustion and concurrent insertion | Hard-bounded capacity, synchronized access and immutable snapshots | Process-local memory only; no durable store |
 | Misleading license/terms claims | Required terms and license for approved state | No automated legal interpretation or external verification |
 | Personal or sensitive data exposure | Sensitivity and retention metadata; no content collection | Metadata may be inaccurate; downstream collector needs independent privacy controls |
 
