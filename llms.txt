@@ -1,0 +1,16 @@
+# OSINT Source Registry
+
+A review-gated catalog of public information source metadata.
+
+- Repository: https://github.com/PCakes303/osint-source-registry
+- Maturity: scaffolding
+- Scope: source metadata, terms/licensing references, access constraints, review state, permitted purposes, and retention.
+- Explicit non-scope: crawling, scraping, downloading, API calls, collection, enrichment, legal determinations, or source authentication.
+- Main documentation: README.md
+- Agent instructions: AGENTS.md
+- Source record contract: docs/SOURCE-RECORD-CONTRACT.md
+- Threat model: docs/THREAT-MODEL.md
+- Schema: schemas/source-record.schema.json
+- Package: osint_source_registry/
+- Tests: tests/
+- Dependencies: Resource Manifest, Schema Registry, Audit & Provenance; all declared, none integration-tested.
