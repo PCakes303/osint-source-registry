@@ -1,0 +1,26 @@
+{
+  "source_id": "example.public-api",
+  "name": "Synthetic Public Research API",
+  "source_type": "public_api",
+  "operator": "Example Research Consortium",
+  "canonical_url": "https://api.example.org/v1/catalog",
+  "jurisdiction": "Example jurisdiction (synthetic)",
+  "access_method": "public_api",
+  "access_auth": "none",
+  "terms_url": "https://example.org/terms",
+  "license_expression": "CC-BY-4.0",
+  "data_sensitivity": "public",
+  "robots_policy": "not_applicable",
+  "collection_constraints": [
+    "Synthetic example only; this is not a real source approval.",
+    "A future collector must review current terms and provider rate limits before access."
+  ],
+  "permitted_purposes": ["research", "verification"],
+  "prohibited_purposes": ["credential harvesting", "targeted surveillance"],
+  "declared_rate_limit_per_minute": 30,
+  "retention_days": 30,
+  "review_status": "approved",
+  "reviewed_at": "2026-10-01T12:00:00Z",
+  "review_expires_at": "2027-04-01T12:00:00Z",
+  "review_notes": "Synthetic fixture using reserved example.org domains. Not a real source or legal determination."
+}
