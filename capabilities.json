@@ -1,0 +1,34 @@
+{
+  "capabilities_version": "1.1.0",
+  "repository": "osint-source-registry",
+  "repository_id": "osint-source-registry",
+  "maturity": "scaffolding",
+  "capabilities": [
+    {
+      "id": "osint.source-record-validation",
+      "name": "Source record validation",
+      "status": "scaffolded",
+      "description": "Validates bounded source metadata, HTTPS URL syntax, access constraints, and review-state invariants.",
+      "evidence": ["tests/test_models.py"],
+      "limitations": ["Validation does not establish legal permission, source authenticity, URL safety, or source accuracy."]
+    },
+    {
+      "id": "osint.approved-source-index",
+      "name": "Approved source metadata index",
+      "status": "scaffolded",
+      "description": "Maintains a bounded in-memory catalog and filters to approved, unexpired sources by purpose and source type.",
+      "evidence": ["tests/test_registry.py"],
+      "limitations": ["The index is process-local, in-memory, and not durable or distributed."]
+    }
+  ],
+  "explicit_non_capabilities": [
+    "Web crawling, scraping, downloading, or source collection",
+    "External API access or authenticated provider integration",
+    "Legal advice or automated license interpretation",
+    "Source identity or authenticity verification",
+    "Cryptographically authenticated reviewer approvals",
+    "Personal-data enrichment or entity profiling",
+    "Durable storage, distributed replication, or federation",
+    "Execution authorization for downstream collectors"
+  ]
+}
