@@ -19,15 +19,13 @@ class SourceRegistry:
     def add(self, record: SourceRecord) -> None:
         if not isinstance(record, SourceRecord):
             raise TypeError("record must be a SourceRecord")
-        errors = validate_source_record(record.to_dict())
-        if errors:
-            raise ValueError("; ".join(errors))
+        snapshot = SourceRecord.from_dict(record.to_dict())
         with self._lock:
-            if record.source_id in self._records:
+            if snapshot.source_id in self._records:
                 raise ValueError("duplicate source_id")
             if len(self._records) >= self._max_records:
                 raise ValueError("source registry capacity reached")
-            self._records[record.source_id] = record
+            self._records[snapshot.source_id] = snapshot
 
     def get(self, source_id: str) -> SourceRecord | None:
         with self._lock:
