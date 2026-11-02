@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "manifest_version": "1.0.0",
+  "id": "osint-source-registry",
+  "name": "osint-source-registry",
+  "visibility": "public",
+  "maturity": "scaffolding",
+  "summary": "Review-gated metadata catalog for public information sources, datasets, APIs, terms, licenses, access constraints, and retention requirements.",
+  "license": {
+    "expression": null,
+    "status": "pending-review",
+    "notes": "Repository-specific license decision remains pending portfolio review."
+  },
+  "interfaces": [
+    {
+      "name": "osint-source-record",
+      "version": "0.1.0",
+      "kind": "schema",
+      "stability": "experimental"
+    },
+    {
+      "name": "local-source-registry",
+      "version": "0.1.0",
+      "kind": "library",
+      "stability": "experimental"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "resource-manifest",
+      "constraint": "source resource metadata alignment; version TBD",
+      "kind": "contract"
+    },
+    {
+      "id": "schema-registry",
+      "constraint": "source record schema governance; version TBD",
+      "kind": "contract"
+    },
+    {
+      "id": "audit-provenance",
+      "constraint": "future review and registry-change audit events; version TBD",
+      "kind": "contract"
+    }
+  ],
+  "security": {
+    "threat_model": "docs/THREAT-MODEL.md",
+    "secrets_in_repository": false,
+    "data_classification": "public",
+    "security_contact": null
+  },
+  "default_branch": "main",
+  "compatibility": [],
+  "evidence": [
+    {
+      "claim": "Source metadata validation and approved-only filtering are covered by unit tests.",
+      "kind": "test",
+      "location": "tests/test_registry.py"
+    }
+  ],
+  "$id": "https://github.com/PCakes303/osint-source-registry/blob/main/manifest.json"
+}
