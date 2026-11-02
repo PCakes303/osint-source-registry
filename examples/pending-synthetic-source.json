@@ -1,0 +1,23 @@
+{
+  "source_id": "example.pending-source",
+  "name": "Unreviewed Synthetic Source",
+  "source_type": "website",
+  "operator": "Unknown (synthetic)",
+  "canonical_url": "https://pending.example.org/",
+  "jurisdiction": "unknown",
+  "access_method": "manual_review",
+  "access_auth": "unknown",
+  "terms_url": null,
+  "license_expression": null,
+  "data_sensitivity": "unknown",
+  "robots_policy": "unknown",
+  "collection_constraints": ["Do not access until terms and permissions have been reviewed."],
+  "permitted_purposes": [],
+  "prohibited_purposes": ["unreviewed collection"],
+  "declared_rate_limit_per_minute": null,
+  "retention_days": null,
+  "review_status": "pending",
+  "reviewed_at": null,
+  "review_expires_at": null,
+  "review_notes": "Synthetic negative fixture. Must never appear in approved-source results."
+}
