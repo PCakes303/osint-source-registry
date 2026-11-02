@@ -2,7 +2,7 @@
 
 **Repository:** `PCakes303/osint-source-registry`  
 **Maturity:** scaffolding  
-**License:** pending portfolio review
+**License:** [Scoped mixed-license policy](LICENSE.md).
 
 ## Purpose
 
