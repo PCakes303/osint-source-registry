@@ -9,16 +9,25 @@
       "name": "Source record validation",
       "status": "scaffolded",
       "description": "Validates bounded source metadata, HTTPS URL syntax, access constraints, and review-state invariants.",
-      "evidence": ["tests/test_models.py"],
-      "limitations": ["Validation does not establish legal permission, source authenticity, URL safety, or source accuracy."]
+      "evidence": [
+        "tests/test_models.py"
+      ],
+      "limitations": [
+        "Validation does not establish legal permission, source authenticity, URL safety, or source accuracy."
+      ]
     },
     {
       "id": "osint.approved-source-index",
       "name": "Approved source metadata index",
       "status": "scaffolded",
-      "description": "Maintains a bounded in-memory catalog and filters to approved, unexpired sources by purpose and source type.",
-      "evidence": ["tests/test_registry.py"],
-      "limitations": ["The index is process-local, in-memory, and not durable or distributed."]
+      "description": "Maintains a synchronized in-memory catalog capped at 100,000 immutable source-record snapshots and filters to approved, unexpired sources by purpose and source type.",
+      "evidence": [
+        "tests/test_registry.py"
+      ],
+      "limitations": [
+        "The index is process-local, in-memory, and not durable or distributed.",
+        "Approval remains unsigned metadata; it is not authenticated reviewer approval or legal determination."
+      ]
     }
   ],
   "explicit_non_capabilities": [
