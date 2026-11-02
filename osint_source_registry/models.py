@@ -104,11 +104,11 @@ def validate_source_record(
     if not isinstance(record["review_status"], str) or record["review_status"] not in REVIEW_STATES:
         errors.append("review_status is not supported")
 
-    for field, max_item_length in (("collection_constraints", 500), ("permitted_purposes", 100), ("prohibited_purposes", 100)):
+    for field, min_item_length, max_item_length in (("collection_constraints", 3, 500), ("permitted_purposes", 2, 100), ("prohibited_purposes", 2, 100)):
         value = record[field]
         if not isinstance(value, (list, tuple)) or len(value) > 20:
             errors.append(f"{field} must be a list with at most 20 items")
-        elif any(not isinstance(item, str) or len(item) < 2 or len(item) > max_item_length for item in value):
+        elif any(not isinstance(item, str) or len(item) < min_item_length or len(item) > max_item_length for item in value):
             errors.append(f"{field} contains an invalid item (maximum {max_item_length} characters)")
 
     rate = record["declared_rate_limit_per_minute"]
