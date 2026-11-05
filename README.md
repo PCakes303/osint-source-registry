@@ -2,7 +2,7 @@
 
 **Repository:** `PCakes303/osint-source-registry`  
 **Maturity:** scaffolding  
-**License:** [Scoped mixed-license policy](LICENSE.md).
+**License status:** `pending-review`. The policy in [LICENSE.md](LICENSE.md) describes the intended mixed-license scope; contributor authority, file-level provenance and third-party notices must be checked before redistribution.
 
 ## Purpose
 
